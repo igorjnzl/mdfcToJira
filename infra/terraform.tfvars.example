@@ -1,0 +1,13 @@
+subscription_id     = "00000000-0000-0000-0000-000000000000"
+tenant_id           = "00000000-0000-0000-0000-000000000000"
+location            = "replace-with-azure-region"
+environment        = "dev"
+resource_group_name = "rg-mdc-jira-dev"
+owner               = "owner@example.com"
+
+additional_tags = {
+  cost-center = "replace-me"
+}
+
+# Set only organization-approved policy or governance tags here.
+data_service_tags = {}

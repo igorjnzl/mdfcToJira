@@ -1,0 +1,18 @@
+{
+  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/example-vm/providers/Microsoft.Security/assessments/11111111-2222-3333-4444-555555555555",
+  "name": "11111111-2222-3333-4444-555555555555",
+  "properties": {
+    "displayName": "Example Defender for Cloud recommendation",
+    "resourceDetails": {
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/example-vm"
+    },
+    "status": {
+      "code": "Unhealthy"
+    },
+    "metadata": {
+      "severity": "High",
+      "description": "Safe PoC payload. Replace the resource and assessment identifiers with a real sandbox recommendation before testing.",
+      "remediationDescription": "Use the Defender recommendation guidance for the selected sandbox resource."
+    }
+  }
+}

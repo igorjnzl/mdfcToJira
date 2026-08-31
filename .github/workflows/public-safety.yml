@@ -1,0 +1,21 @@
+name: Public repository safety
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    runs-on: windows-latest
+    steps:
+      - name: Check out full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Scan tracked files and history
+        shell: pwsh
+        run: ./scripts/Test-PublicRepository.ps1 -History

@@ -1,0 +1,19 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "JIRA_BASE_URL": "https://your-domain.atlassian.net",
+    "JIRA_USER_EMAIL": "automation@example.com",
+    "JIRA_API_TOKEN": "set-locally-only",
+    "JIRA_PROJECT_KEY": "SEC",
+    "JIRA_SERVICE_DESK_ID": "10",
+    "JIRA_REQUEST_TYPE_ID": "25",
+    "DEFENDER_GOVERNANCE_OWNER_DOMAIN": "jira.local",
+    "DEFENDER_HIGH_DUE_DAYS": "7",
+    "DEFENDER_MEDIUM_DUE_DAYS": "30",
+    "DEFENDER_LOW_DUE_DAYS": "90",
+    "DEFENDER_DEFAULT_DUE_DAYS": "30",
+    "DEFENDER_APPLY_GRACE_PERIOD": "false"
+  }
+}
