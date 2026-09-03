@@ -301,4 +301,10 @@ Confirm that only intended source files are staged and that these local files ar
 - `function_app/local.settings.json`, virtual environments, and Python caches
 - Signed Logic App callback URLs, credentials, and API tokens
 
-The repository does not select a software license on the customer's behalf. Add the customer-approved `LICENSE` file before granting public reuse rights or accepting external contributions.
+Confirm that the customer's upstream governance permits publication under the MIT License before publishing.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE). Copyright (c) 2026 Igor J.
+
+The license permits use, copying, modification, merging, publication, distribution, sublicensing, and sale of the software, provided that the copyright and permission notices are retained. The software is supplied **as is**, without warranty or liability from the authors or copyright holders.
