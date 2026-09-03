@@ -114,11 +114,6 @@ variable "zone_redundant" {
   type        = bool
 }
 
-variable "governance_owner_domain" {
-  description = "Synthetic domain used for Jira back-reference owners."
-  type        = string
-}
-
 variable "high_due_days" {
   description = "Due days for high-severity recommendations."
   type        = number

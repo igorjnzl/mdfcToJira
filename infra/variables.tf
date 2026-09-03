@@ -56,12 +56,6 @@ variable "data_service_tags" {
   default     = {}
 }
 
-variable "governance_owner_domain" {
-  description = "Synthetic domain used to encode Jira keys in Defender governance owners."
-  type        = string
-  default     = "jira.local"
-}
-
 variable "high_due_days" {
   description = "Defender remediation due days for high-severity recommendations."
   type        = number

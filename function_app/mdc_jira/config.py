@@ -44,7 +44,6 @@ class Settings:
     jira_project_key: str
     jira_service_desk_id: str
     jira_request_type_id: str
-    governance_owner_domain: str
     high_due_days: int
     medium_due_days: int
     low_due_days: int
@@ -61,9 +60,6 @@ class Settings:
             jira_project_key=_required(values, "JIRA_PROJECT_KEY"),
             jira_service_desk_id=_required(values, "JIRA_SERVICE_DESK_ID"),
             jira_request_type_id=_required(values, "JIRA_REQUEST_TYPE_ID"),
-            governance_owner_domain=values.get(
-                "DEFENDER_GOVERNANCE_OWNER_DOMAIN", "jira.local"
-            ).strip(),
             high_due_days=_positive_int(values, "DEFENDER_HIGH_DUE_DAYS", 7),
             medium_due_days=_positive_int(values, "DEFENDER_MEDIUM_DUE_DAYS", 30),
             low_due_days=_positive_int(values, "DEFENDER_LOW_DUE_DAYS", 90),

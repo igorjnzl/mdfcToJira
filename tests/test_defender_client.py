@@ -42,7 +42,6 @@ def test_assign_jira_request_writes_ticket_details_and_owner() -> None:
         correlation_id=recommendation().correlation_id,
     )
     client = DefenderClient(
-        owner_domain="jira.local",
         apply_grace_period=False,
         credential=StubCredential(),
         session=session,
@@ -57,7 +56,7 @@ def test_assign_jira_request_writes_ticket_details_and_owner() -> None:
     assert "api-version=2022-01-01-preview" in url
     assert request["headers"]["Authorization"] == "Bearer arm-token"
     properties = request["json"]["properties"]
-    assert properties["owner"] == "jira-sec-43@jira.local"
+    assert properties["owner"] == "SEC-43"
     assert properties["remediationDueDate"] == "2026-09-04T12:00:00Z"
     assert properties["isGracePeriod"] is False
     assert properties["additionalData"] == {

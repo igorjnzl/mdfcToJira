@@ -116,7 +116,6 @@ resource "azurerm_function_app_flex_consumption" "this" {
       AzureWebJobsStorage__queueServiceUri      = var.queue_service_endpoint
       AzureWebJobsStorage__tableServiceUri      = var.table_service_endpoint
       APPLICATIONINSIGHTS_AUTHENTICATION_STRING = "Authorization=AAD;ClientId=${var.function_identity_client_id}"
-      DEFENDER_GOVERNANCE_OWNER_DOMAIN          = var.governance_owner_domain
       DEFENDER_HIGH_DUE_DAYS                    = tostring(var.high_due_days)
       DEFENDER_MEDIUM_DUE_DAYS                  = tostring(var.medium_due_days)
       DEFENDER_LOW_DUE_DAYS                     = tostring(var.low_due_days)

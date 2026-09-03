@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import re
 import uuid
 from datetime import UTC, datetime, timedelta
 from typing import TYPE_CHECKING, Any, Protocol
@@ -35,14 +34,12 @@ class DefenderClient:
     def __init__(
         self,
         *,
-        owner_domain: str,
         apply_grace_period: bool,
         timeout_seconds: float = 30.0,
         credential: TokenCredential | None = None,
         session: requests.Session | None = None,
         now: datetime | None = None,
     ) -> None:
-        self._owner_domain = owner_domain
         self._apply_grace_period = apply_grace_period
         self._timeout_seconds = timeout_seconds
         self._credential = credential or self._default_credential()
@@ -142,12 +139,12 @@ class DefenderClient:
             "ticketLink": jira_request.web_url,
         }
 
-    def _owner_for(self, issue_key: str) -> str:
-        local_part = re.sub(r"[^a-z0-9._-]", "-", issue_key.casefold()).strip("-.")
-        domain = self._owner_domain.casefold().strip().strip("@")
-        if not local_part or not domain:
+    @staticmethod
+    def _owner_for(issue_key: str) -> str:
+        owner = issue_key.strip()
+        if not owner:
             raise DefenderApiError("Cannot build the Defender governance owner", status_code=500)
-        return f"jira-{local_part}@{domain}"
+        return owner
 
     @staticmethod
     def _numeric_issue_id(issue_id: str) -> int:

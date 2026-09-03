@@ -103,7 +103,13 @@ catch {
     $deployments = (ConvertFrom-JsonPrefix -Text $deploymentResponse).value
     $latestDeployment = $deployments |
         Where-Object { $_.properties.deployer -eq "az_cli" } |
-        Sort-Object { [DateTimeOffset]::Parse($_.properties.received_time) } -Descending |
+        Sort-Object {
+            [DateTimeOffset]::Parse(
+                $_.properties.received_time,
+                [Globalization.CultureInfo]::InvariantCulture,
+                [Globalization.DateTimeStyles]::AssumeUniversal
+            )
+        } -Descending |
         Select-Object -First 1
 
     $routes = az functionapp function list `
@@ -119,7 +125,11 @@ catch {
     $expectedRoutes = @("jira/requests", "defender/recommendations/assign")
     $missingRoutes = @($expectedRoutes | Where-Object { $_ -notin $routes })
     $isRecent = $latestDeployment -and (
-        [DateTimeOffset]::Parse($latestDeployment.properties.received_time) -ge $deploymentStarted.AddMinutes(-1)
+        [DateTimeOffset]::Parse(
+            $latestDeployment.properties.received_time,
+            [Globalization.CultureInfo]::InvariantCulture,
+            [Globalization.DateTimeStyles]::AssumeUniversal
+        ) -ge $deploymentStarted.AddMinutes(-1)
     )
 
     if (-not ($isRecent -and $latestDeployment.properties.complete -and $missingRoutes.Count -eq 0)) {

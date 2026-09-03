@@ -83,7 +83,6 @@ module "compute" {
   maximum_instance_count                 = var.maximum_instance_count
   instance_memory_mb                     = var.instance_memory_mb
   zone_redundant                         = var.zone_redundant
-  governance_owner_domain                = var.governance_owner_domain
   high_due_days                          = var.high_due_days
   medium_due_days                        = var.medium_due_days
   low_due_days                           = var.low_due_days

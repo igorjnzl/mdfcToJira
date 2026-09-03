@@ -59,7 +59,6 @@ def update_defender_recommendation(
         raise ValueError("Jira response correlationId does not match the recommendation")
 
     client = defender_client or DefenderClient(
-        owner_domain=settings.governance_owner_domain,
         apply_grace_period=settings.apply_grace_period,
     )
     return client.assign_jira_request(
