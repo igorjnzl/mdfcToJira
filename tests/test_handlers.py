@@ -32,8 +32,7 @@ def settings() -> Settings:
             "JIRA_USER_EMAIL": "automation@example.com",
             "JIRA_API_TOKEN": "not-a-real-token",
             "JIRA_PROJECT_KEY": "SEC",
-            "JIRA_SERVICE_DESK_ID": "10",
-            "JIRA_REQUEST_TYPE_ID": "25",
+            "JIRA_EPIC_KEY": "SEC-1",
             "DEFENDER_HIGH_DUE_DAYS": "7",
         }
     )

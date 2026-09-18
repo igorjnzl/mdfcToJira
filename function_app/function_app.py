@@ -8,7 +8,7 @@ from typing import Any
 import azure.functions as func
 from mdc_jira.config import ConfigurationError, Settings
 from mdc_jira.defender_client import DefenderApiError
-from mdc_jira.handlers import create_jira_service_request, update_defender_recommendation
+from mdc_jira.handlers import create_jira_task, update_defender_recommendation
 from mdc_jira.jira_client import JiraApiError
 from mdc_jira.models import PayloadValidationError
 
@@ -55,7 +55,7 @@ def _error_response(exc: Exception) -> func.HttpResponse:
 @app.route(route="jira/requests", methods=["POST"])
 def create_jira_request(req: func.HttpRequest) -> func.HttpResponse:
     try:
-        result = create_jira_service_request(_request_json(req), Settings.from_env())
+        result = create_jira_task(_request_json(req), Settings.from_env())
         return _json_response(result.to_dict(), 201 if result.created else 200)
     except Exception as exc:
         return _error_response(exc)

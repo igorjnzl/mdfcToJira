@@ -2,12 +2,11 @@ locals {
   subscription_scope = "/subscriptions/${var.subscription_id}"
   package_path       = "${path.root}/released-package.zip"
   key_vault_secrets = {
-    JIRA_API_TOKEN       = "jira-api-token"
-    JIRA_USER_EMAIL      = "jira-user-email"
-    JIRA_BASE_URL        = "jira-base-url"
-    JIRA_PROJECT_KEY     = "jira-project-key"
-    JIRA_SERVICE_DESK_ID = "jira-service-desk-id"
-    JIRA_REQUEST_TYPE_ID = "jira-request-type-id"
+    JIRA_API_TOKEN   = "jira-api-token"
+    JIRA_USER_EMAIL  = "jira-user-email"
+    JIRA_BASE_URL    = "jira-base-url"
+    JIRA_PROJECT_KEY = "jira-project-key"
+    JIRA_EPIC_KEY    = "jira-epic-key"
   }
 }
 

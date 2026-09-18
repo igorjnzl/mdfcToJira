@@ -126,7 +126,7 @@ class DefenderRecommendation:
             f"resourceId/{encoded_resource}"
         )
 
-    def jira_description(self) -> str:
+    def jira_description(self) -> dict[str, object]:
         lines = [
             "Microsoft Defender for Cloud recommendation",
             "",
@@ -142,7 +142,17 @@ class DefenderRecommendation:
             lines.extend(("", "Description", self.description))
         if self.remediation_description:
             lines.extend(("", "Recommended remediation", self.remediation_description))
-        return "\n".join(lines)
+        return {
+            "type": "doc",
+            "version": 1,
+            "content": [
+                {
+                    "type": "paragraph",
+                    "content": [{"type": "text", "text": line}] if line else [],
+                }
+                for line in "\n".join(lines).splitlines()
+            ],
+        }
 
 
 @dataclass(frozen=True)

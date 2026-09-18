@@ -25,15 +25,13 @@ class JiraClient:
         user_email: str,
         api_token: str,
         project_key: str,
-        service_desk_id: str,
-        request_type_id: str,
+        epic_key: str,
         timeout_seconds: float = 30.0,
         session: requests.Session | None = None,
     ) -> None:
         self._base_url = base_url.rstrip("/")
         self._project_key = project_key
-        self._service_desk_id = service_desk_id
-        self._request_type_id = request_type_id
+        self._epic_key = epic_key
         self._timeout_seconds = timeout_seconds
         self._session = session or self._build_session()
         self._session.auth = (user_email, api_token)
@@ -58,7 +56,7 @@ class JiraClient:
         existing = self._find_existing(recommendation)
         if existing is not None:
             return existing
-        return self._create_request(recommendation)
+        return self._create_task(recommendation)
 
     def _find_existing(self, recommendation: DefenderRecommendation) -> JiraRequest | None:
         marker = recommendation.correlation_marker
@@ -81,15 +79,16 @@ class JiraClient:
             raise JiraApiError("Jira search returned an invalid issue object")
         return self._to_result(issue, recommendation.correlation_id, created=False)
 
-    def _create_request(self, recommendation: DefenderRecommendation) -> JiraRequest:
+    def _create_task(self, recommendation: DefenderRecommendation) -> JiraRequest:
         response = self._send(
             "POST",
-            "/rest/servicedeskapi/request",
+            "/rest/api/3/issue",
             expected_status=201,
             json={
-                "serviceDeskId": self._service_desk_id,
-                "requestTypeId": self._request_type_id,
-                "requestFieldValues": {
+                "fields": {
+                    "project": {"key": self._project_key},
+                    "issuetype": {"name": "Task"},
+                    "parent": {"key": self._epic_key},
                     "summary": recommendation.jira_summary,
                     "description": recommendation.jira_description(),
                 },

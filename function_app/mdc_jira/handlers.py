@@ -9,7 +9,7 @@ from mdc_jira.jira_client import JiraClient
 from mdc_jira.models import DefenderRecommendation, JiraRequest
 
 
-def create_jira_service_request(
+def create_jira_task(
     payload: Mapping[str, Any],
     settings: Settings,
     *,
@@ -24,8 +24,7 @@ def create_jira_service_request(
         user_email=settings.jira_user_email,
         api_token=settings.jira_api_token,
         project_key=settings.jira_project_key,
-        service_desk_id=settings.jira_service_desk_id,
-        request_type_id=settings.jira_request_type_id,
+        epic_key=settings.jira_epic_key,
     )
     return client.create_or_get(recommendation)
 

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import re
 from collections.abc import Mapping
 from dataclasses import dataclass
 
@@ -42,8 +43,7 @@ class Settings:
     jira_user_email: str
     jira_api_token: str
     jira_project_key: str
-    jira_service_desk_id: str
-    jira_request_type_id: str
+    jira_epic_key: str
     high_due_days: int
     medium_due_days: int
     low_due_days: int
@@ -53,13 +53,15 @@ class Settings:
     @classmethod
     def from_env(cls, environ: Mapping[str, str] | None = None) -> Settings:
         values = environ if environ is not None else os.environ
+        epic_key = _required(values, "JIRA_EPIC_KEY")
+        if not re.fullmatch(r"[A-Za-z][A-Za-z0-9_]*-[1-9][0-9]*", epic_key):
+            raise ConfigurationError("JIRA_EPIC_KEY must be an issue key such as AZ-123")
         return cls(
             jira_base_url=_required(values, "JIRA_BASE_URL").rstrip("/"),
             jira_user_email=_required(values, "JIRA_USER_EMAIL"),
             jira_api_token=_required(values, "JIRA_API_TOKEN"),
             jira_project_key=_required(values, "JIRA_PROJECT_KEY"),
-            jira_service_desk_id=_required(values, "JIRA_SERVICE_DESK_ID"),
-            jira_request_type_id=_required(values, "JIRA_REQUEST_TYPE_ID"),
+            jira_epic_key=epic_key,
             high_due_days=_positive_int(values, "DEFENDER_HIGH_DUE_DAYS", 7),
             medium_due_days=_positive_int(values, "DEFENDER_MEDIUM_DUE_DAYS", 30),
             low_due_days=_positive_int(values, "DEFENDER_LOW_DUE_DAYS", 90),

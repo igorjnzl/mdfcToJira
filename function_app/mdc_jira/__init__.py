@@ -1,1 +1,1 @@
-"""Microsoft Defender for Cloud to Jira Service Management integration."""
+"""Microsoft Defender for Cloud to epic-linked Jira Tasks integration."""
